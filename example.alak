@@ -1,9 +1,4 @@
 let ambag = 10;
 let tropa = "leetz";
-print ambag + 5;
-if ambag > 0 {
-    print tropa; 
-   
-} else {
-    print tropa;
-}
+print ambag + 10;
+print tropa;
