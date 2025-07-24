@@ -4,7 +4,7 @@
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 ```bash
 alak/
 ├── compiler.py # Entry point for compiling & running Alak files
@@ -17,7 +17,7 @@ alak/
 
 ---
 
-## ▶️ Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
