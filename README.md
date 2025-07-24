@@ -5,6 +5,7 @@
 ---
 
 ## 🗂 Project Structure
+```bash
 alak/
 ├── compiler.py # Entry point for compiling & running Alak files
 ├── interpreter.py # Evaluates parsed syntax tree
@@ -12,6 +13,7 @@ alak/
 ├── token_types.py # Definitions of token types
 ├── tokenizer.py # Lexical analyzer (lexer)
 └── example.alak # Sample Alak program
+```
 
 ---
 
