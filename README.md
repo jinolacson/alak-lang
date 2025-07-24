@@ -1,4 +1,4 @@
-# 🧪 Alak: A Simple Programming Language in Python
+# 🧪 Alak: A Toy Programming Language built with Python
 
 **Alak** is a simple interpreted programming language built in Python for educational and experimental purposes. It features a basic compiler, tokenizer, parser, and interpreter pipeline. Alak was designed to help you understand how programming languages work under the hood.
 
