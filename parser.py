@@ -22,7 +22,7 @@ class Parser:
     
     def statement(self):
         kind, _ = self.peek()
-        if kind == 'LET':
+        if kind == 'LAPAG':
             return self.let_statement()
         elif kind == 'PRINT':
             return self.print_statement()
@@ -36,12 +36,12 @@ class Parser:
             raise SyntaxError(f"Unknown statement: {kind}")
     
     def let_statement(self):
-        self.match('LET')
+        self.match('LAPAG')
         name = self.match('IDENT')
         self.match('EQUAL')
         value = self.expression()
         self.match('SEMICOLON')
-        return ('let', name, value)
+        return ('lapag', name, value)
 
     def assignment(self):
         name = self.match('IDENT')      # variable name

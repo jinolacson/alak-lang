@@ -7,7 +7,7 @@ class Interpreter:
             self.execute(stmt)
 
     def execute(self, stmt):
-        if stmt[0] == 'let':
+        if stmt[0] == 'lapag':
             _, name, expr = stmt
             self.env[name] = self.evaluate(expr)
 

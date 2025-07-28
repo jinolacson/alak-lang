@@ -3,7 +3,7 @@
 # File: token_types.py
 TOKENS = [
     ('NUMBER', r'\d+'),
-    ('LET', r'\blet\b'),
+    ('LAPAG', r'\blapag\b'),
     ('PRINT', r'\bshot\b'),
     ('IF', r'\bif\b'),
     ('ELSE', r'\belse\b'),

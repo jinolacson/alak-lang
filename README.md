@@ -35,19 +35,26 @@ Make sure you have Python 3.10 installed.
 ### Example
 Here's what an example .alak file might look like:
 ```bash
-let name = "Leetz";
-let ambag_one = 5;
-let ambag_two = 10;
-let total_ambag = 0;
+lapag tropa = "Leetz";
+lapag ambag_one = 5;
+lapag ambag_two = 10;
+lapag total_ambag = 0;
 
 total_ambag = ambag_one + ambag_two;
-shot name;
+shot tropa;
 shot total_ambag;
 
 if total_ambag > 15 {
   shot "letsgo";
 } else {
   shot "Ambag muna";
+}
+
+
+lapag i = 0;
+while i < 5 {
+  shot i;
+  i = i + 1;
 }
 
 ```
