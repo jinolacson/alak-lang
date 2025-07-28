@@ -80,10 +80,32 @@ Shot na Leetz may ambag 155 pesos na!
 * Interpreter (interpreter.py): Walks through the AST and executes commands.
 * Compiler (compiler.py): Orchestrates the entire compilation and execution process.
 
-### Future Improvements
-Add support for more complex expressions
-Add function definitions
-Improve error handling
+### Current Features
+* Variable declaration using lapag
+* Expression assignment and math operations
+* shot for printing with string interpolation
+* Conditional logic: if / else
+* Loops: while
+* Functions: fun with zero-arg support and calling
+* String interpolation with {var} in shot
 
-📜 License
+
+### Future Improvements
+* Function Parameters – Allow passing arguments into functions
+  ```Example: fun greet(name) { shot "Hi {name}"; }```
+*  Return Statement (balik) – Enable returning values from functions
+```Example: balik a + b;```
+* Function Scope – Support local variables inside functions using scoped env
+* Operator Precedence & Grouping – Handle parentheses in math
+```Example: lapag result = (5 + 3) * 2;```
+* Arrays (Lists) – Allow defining and accessing list items
+```Example: lapag items = ["a", "b"]; shot items[0];```
+* Built-in Functions – Add helpers like length(), type(), input()
+* For Loop Syntax – Add a for-style loop (sugar for while)
+* Logical Operators – Support &&, ||, !, and ==, != in conditions
+* Error Reporting with Line Numbers – Improve debugging and tracing
+* REPL (Interactive Mode) – Let users test code line-by-line
+* Standard Library – Include reusable helpers and utilities
+
+### License
 MIT License. Feel free to use and modify.
