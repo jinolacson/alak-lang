@@ -3,8 +3,8 @@
 # File: token_types.py
 TOKENS = [
     ('NUMBER', r'\d+'),
-    ('LET', r'let'),
-    ('PRINT', r'print'),
+    ('LET', r'\blet\b'),
+    ('PRINT', r'\bshot\b'),
     ('IF', r'\bif\b'),
     ('ELSE', r'\belse\b'),
     ('WHILE', r'\bwhile\b'),
@@ -12,11 +12,15 @@ TOKENS = [
     ('EQUAL', r'='),
     ('PLUS', r'\+'),
     ('GT', r'>'),
+    ('GTE', r'>='),
     ('LT', r'<'),
+    ('LTE', r'<='),
+    ('EQ', r'=='),
+    ('NEQ', r'!='),
     ('LBRACE', r'\{'),
     ('RBRACE', r'\}'),
     ('SEMICOLON', r';'),
-    ('STRING', r"'[^']*'"),
+    ('STRING', r'"[^"]*"'),
     ('SKIP', r'[ \t]+'),
     ('NEWLINE', r'\n'),
 ]

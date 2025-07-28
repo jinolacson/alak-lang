@@ -1,4 +1,14 @@
-let ambag = 10;
-let tropa = "leetz";
-print ambag + 10;
-print tropa;
+let name = "Leetz";
+let ambag_one = 5;
+let ambag_two = 10;
+let total_ambag = 0;
+
+total_ambag = ambag_one + ambag_two;
+shot name;
+shot total_ambag;
+
+if total_ambag > 15 {
+  shot "letsgo";
+} else {
+  shot "Ambag muna";
+}

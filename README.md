@@ -35,13 +35,28 @@ Make sure you have Python 3 installed.
 ### Example
 Here's what an example .alak file might look like:
 ```bash
-let x = 10;
-print x + 5;
+let name = "Leetz";
+let ambag_one = 5;
+let ambag_two = 10;
+let total_ambag = 0;
+
+total_ambag = ambag_one + ambag_two;
+shot name;
+shot total_ambag;
+
+if total_ambag > 15 {
+  shot "letsgo";
+} else {
+  shot "Ambag muna";
+}
+
 ```
 
 Output:
 ```bash
+Leetz
 15
+Ambag muna
 ```
 
 ### How It Works
