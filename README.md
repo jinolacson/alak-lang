@@ -37,37 +37,41 @@ Here's what an example ```.alak``` file might look like:
 ```bash
 lapag tropa = "Leetz";
 lapag ambag_one = 5;
-lapag ambag_two = 10;
+lapag ambag_two = 150;
 lapag total_ambag = 0;
 
 total_ambag = ambag_one + ambag_two;
-shot tropa;
-shot total_ambag;
 
-if total_ambag > 15 {
+if total_ambag > 100 {
   shot "letsgo";
 } else {
   shot "Ambag muna";
 }
 
 
-lapag i = 0;
-jumbo i < 5 {
-  shot i;
-  i = i + 1;
+lapag bote = 0;
+jumbo bote < 5 {
+  shot "Bili na ng {bote} gin";
+  bote = bote + 1;
 }
+
+fun oras_na {
+  shot "Shot na {tropa} may ambag {total_ambag} pesos na!";
+}
+
+oras_na();
+
 ```
 
 Output:
 ```bash
-Leetz
-15
-Ambag muna
-0
-1
-2
-3
-4
+letsgo
+Bili na ng 0 gin
+Bili na ng 1 gin
+Bili na ng 2 gin
+Bili na ng 3 gin
+Bili na ng 4 gin
+Shot na Leetz may ambag 155 pesos na!
 ```
 
 ### How It Works

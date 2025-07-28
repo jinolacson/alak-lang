@@ -19,8 +19,8 @@ tk = Tokenizer(code)
 tokens = tk.tokenize()
 
 # Output tokens
-for token in tokens:
-    print(token)
+# for token in tokens:
+#     print(token)
 
 # Parse
 parser = Parser(tokens)

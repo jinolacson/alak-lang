@@ -20,7 +20,18 @@ class Interpreter:
 
         elif stmt[0] == 'print':
             _, expr = stmt
-            print(self.evaluate(expr))
+            value = self.evaluate(expr)
+
+            # If value is a string, interpolate variables inside `{}` 
+            #  Example  shot "Shot na {tropa}";
+            if isinstance(value, str):
+                import re
+                def replacer(match):
+                    var_name = match.group(1)
+                    return str(self.env.get(var_name, f'{{{var_name}}}'))
+                value = re.sub(r'\{(\w+)\}', replacer, value)
+            print(value)
+
 
         elif stmt[0] == 'if':
             _, cond, then_branch, else_branch = stmt
@@ -37,7 +48,18 @@ class Interpreter:
                 for s in body:
                     self.execute(s)
 
-                        
+        elif stmt[0] == 'fun': # function declaration
+            _, name, body = stmt
+            self.env[name] = ('function', body)
+
+        elif stmt[0] == 'call':
+            _, name = stmt
+            if name not in self.env or self.env[name][0] != 'function':
+                raise RuntimeError(f"Function '{name}' not defined")
+            _, body = self.env[name]
+            for inner_stmt in body:
+                self.execute(inner_stmt)
+
     def evaluate(self, expr):
         kind = expr[0]
         if kind == 'number':

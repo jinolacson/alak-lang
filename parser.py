@@ -4,6 +4,7 @@ class Parser:
         self.pos = 0
 
     def peek(self):
+        # print(f"Peeking at token: {self.tokens[self.pos] if self.pos < len(self.tokens) else 'EOF'}")
         return self.tokens[self.pos] if self.pos < len(self.tokens) else (None, None)
 
     def match(self, expected_type):
@@ -22,6 +23,7 @@ class Parser:
     
     def statement(self):
         kind, _ = self.peek()
+        # print(f"Parsing statement: {kind}")
         if kind == 'LAPAG': # 'lapag' for let statement
             return self.let_statement()
         elif kind == 'PRINT':
@@ -31,7 +33,9 @@ class Parser:
         elif kind == 'JUMBO':  # 'jumbo' for while loop
             return self.while_statement()
         elif kind == 'IDENT':
-            return self.assignment()
+            return self.assignment_or_call()
+        elif kind == 'FUN':
+            return self.function_declaration()
         else:
             raise SyntaxError(f"Unknown statement: {kind}")
     
@@ -43,12 +47,25 @@ class Parser:
         self.match('SEMICOLON')
         return ('lapag', name, value)
 
-    def assignment(self):
-        name = self.match('IDENT')      # variable name
-        self.match('EQUAL')             # =
-        expr = self.expression()        # right-hand side expression
-        self.match('SEMICOLON')         # ;
-        return ('assign', name, expr)   # output: ('assign', 'total_ambag', expr)
+    # Handles assignment or function call
+    def assignment_or_call(self):
+        name = self.match('IDENT')
+        next_kind, _ = self.peek()
+
+        if next_kind == 'EQUAL':
+            self.match('EQUAL')
+            expr = self.expression()
+            self.match('SEMICOLON')
+            return ('assign', name, expr)
+
+        elif next_kind == 'LPAREN':
+            self.match('LPAREN')
+            self.match('RPAREN')
+            self.match('SEMICOLON')
+            return ('call', name)
+
+        else:
+            raise SyntaxError(f"Unexpected token after IDENT: {next_kind}")
 
 
     def print_statement(self):
@@ -85,13 +102,22 @@ class Parser:
         self.match('RBRACE')
         return ('jumbo', condition, body)
 
+    def function_declaration(self):
+        self.match('FUN')               # Consume 'fun'
+        name = self.match('IDENT')      # Function name
+        self.match('LBRACE')            # Start of block
 
+        body = []
+        while self.peek()[0] != 'RBRACE':
+            body.append(self.statement())
+
+        self.match('RBRACE')            # End of block
+        return ('fun', name, body)
+
+    # Parses an expression, which can be a number, string, variable, or a more complex expression
+    # This is a simplified version and can be extended to handle more complex expressions
     def expression(self):
-        return self.comparison()
-
-    def comparison(self):
         left = self.additive()
-
         while self.peek()[0] in ('GT', 'LT', 'GTE', 'LTE', 'EQ', 'NEQ'):
             op = self.match(self.peek()[0])
             right = self.additive()
@@ -108,7 +134,8 @@ class Parser:
             elif op == '!=':
                 left = ('neq', left, right)
         return left
-
+    
+    # Handles addition
     def additive(self):
         left = self.term()
         while self.peek()[0] == 'PLUS':
@@ -117,8 +144,7 @@ class Parser:
             left = ('add', left, right)
         return left
 
-    
-
+    # Parses a term or type of expression
     def term(self):
         kind, value = self.peek()
         if kind == 'NUMBER':
