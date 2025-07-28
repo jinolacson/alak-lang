@@ -52,11 +52,10 @@ if total_ambag > 15 {
 
 
 lapag i = 0;
-while i < 5 {
+jumbo i < 5 {
   shot i;
   i = i + 1;
 }
-
 ```
 
 Output:
@@ -64,6 +63,11 @@ Output:
 Leetz
 15
 Ambag muna
+0
+1
+2
+3
+4
 ```
 
 ### How It Works
@@ -74,7 +78,6 @@ Ambag muna
 
 ### Future Improvements
 Add support for more complex expressions
-Implement control flow (if, while, loops)
 Add function definitions
 Improve error handling
 

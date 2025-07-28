@@ -22,13 +22,13 @@ class Parser:
     
     def statement(self):
         kind, _ = self.peek()
-        if kind == 'LAPAG':
+        if kind == 'LAPAG': # 'lapag' for let statement
             return self.let_statement()
         elif kind == 'PRINT':
             return self.print_statement()
         elif kind == 'IF':
             return self.if_statement()
-        elif kind == 'WHILE':
+        elif kind == 'JUMBO':  # 'jumbo' for while loop
             return self.while_statement()
         elif kind == 'IDENT':
             return self.assignment()
@@ -76,14 +76,14 @@ class Parser:
         return ('if', condition, then_branch, else_branch)
 
     def while_statement(self):
-        self.match('WHILE')
+        self.match('JUMBO')
         condition = self.expression()
         self.match('LBRACE')
         body = []
         while self.peek()[0] != 'RBRACE':
             body.append(self.statement())
         self.match('RBRACE')
-        return ('while', condition, body)
+        return ('jumbo', condition, body)
 
 
     def expression(self):

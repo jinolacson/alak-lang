@@ -15,7 +15,7 @@ if total_ambag > 15 {
 
 
 lapag i = 0;
-while i < 5 {
+jumbo i < 5 {
   shot i;
   i = i + 1;
 }

@@ -7,7 +7,7 @@ TOKENS = [
     ('PRINT', r'\bshot\b'),
     ('IF', r'\bif\b'),
     ('ELSE', r'\belse\b'),
-    ('WHILE', r'\bwhile\b'),
+    ('JUMBO', r'\bjumbo\b'),
     ('IDENT', r'[a-zA-Z_]\w*'),
     ('EQUAL', r'='),
     ('PLUS', r'\+'),

@@ -7,7 +7,7 @@ class Interpreter:
             self.execute(stmt)
 
     def execute(self, stmt):
-        if stmt[0] == 'lapag':
+        if stmt[0] == 'lapag':  # let statement
             _, name, expr = stmt
             self.env[name] = self.evaluate(expr)
 
@@ -31,7 +31,7 @@ class Interpreter:
                 for s in else_branch:
                     self.execute(s)
         
-        elif stmt[0] == 'while':
+        elif stmt[0] == 'jumbo': # while loop
             _, cond, body = stmt
             while self.evaluate(cond):
                 for s in body:
