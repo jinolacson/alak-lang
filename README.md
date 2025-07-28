@@ -28,9 +28,9 @@ cd alak
 
 ### Run an Alak Program
 ```bash
-python compiler.py example.alak
+python3.10 compiler.py example.alak
 ```
-Make sure you have Python 3 installed.
+Make sure you have Python 3.10 installed.
 
 ### Example
 Here's what an example .alak file might look like:
