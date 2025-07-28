@@ -12,3 +12,10 @@ if total_ambag > 15 {
 } else {
   shot "Ambag muna";
 }
+
+
+let i = 0;
+while i < 5 {
+  shot i;
+  i = i + 1;
+}

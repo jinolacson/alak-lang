@@ -78,8 +78,13 @@ class Parser:
     def while_statement(self):
         self.match('WHILE')
         condition = self.expression()
-        body = self.block()
+        self.match('LBRACE')
+        body = []
+        while self.peek()[0] != 'RBRACE':
+            body.append(self.statement())
+        self.match('RBRACE')
         return ('while', condition, body)
+
 
     def expression(self):
         return self.comparison()

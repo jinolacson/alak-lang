@@ -30,6 +30,12 @@ class Interpreter:
             elif else_branch:
                 for s in else_branch:
                     self.execute(s)
+        
+        elif stmt[0] == 'while':
+            _, cond, body = stmt
+            while self.evaluate(cond):
+                for s in body:
+                    self.execute(s)
 
                         
     def evaluate(self, expr):

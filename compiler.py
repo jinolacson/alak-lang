@@ -32,8 +32,3 @@ try:
 except SyntaxError as e:
     print(f"Syntax Error: {e}")
     sys.exit(1)
-
-
-
-
-# python compiler.py example.alak
