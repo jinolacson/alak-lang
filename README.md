@@ -33,7 +33,7 @@ python3.10 compiler.py example.alak
 Make sure you have Python 3.10 installed.
 
 ### Example
-Here's what an example .alak file might look like:
+Here's what an example ```.alak``` file might look like:
 ```bash
 lapag tropa = "Leetz";
 lapag ambag_one = 5;
