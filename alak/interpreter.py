@@ -1,3 +1,10 @@
+"""
+Developer: leetz-kowd
+Project: alak
+Date: 2025-07-21
+Version: 1.0.0
+"""
+
 from lark import Lark, Transformer
 
 alak_grammar = """

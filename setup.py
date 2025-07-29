@@ -12,7 +12,7 @@ setup(
             'alak = alak.cli:main',
         ],
     },
-    author="Jino",
+    author="leetz-kowd",
     description="A Tagalog-inspired esolang based on inuman culture.",
     classifiers=[
         "Programming Language :: Python :: 3",
