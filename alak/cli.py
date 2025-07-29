@@ -31,7 +31,7 @@ def init_project():
         print(f"Created {filename} with starter code.")
 
 def run_repl():
-    print("Welcome to Alak REPL! Type 'exit' to quit.")
+    print("Welcome sa tropa sa REPL! tatagay ba tayo? kung hindi itype ang 'exit' para mag quit.")
     interpreter = AlakInterpreter()
     parser = Lark(alak_grammar, parser='lalr', transformer=interpreter)
 
