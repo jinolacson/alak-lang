@@ -21,14 +21,14 @@ alak-lang/
 ## Getting Started
 
 ### 1. How to install
+Make sure you have Python 3.x installed.
 
 ```bash
 git clone git@github.com:jinolacson/alak-lang.git
-python3 -m venv env && source env/bin/activate
-pip install -e .
+python3 -m venv env && source env/bin/activate && pip install -e .
 ```
 
-### Example usage
+### Usage
 ```bash
 alak init # Creates hello.alak
 
@@ -36,9 +36,8 @@ alak run hello.alak # Runs the program
 
 alak --version # Outputs: alak version 0.1.0
 ```
-Make sure you have Python 3.10 installed.
 
-### Example
+### Sample Program
 Here's what an example ```.alak``` file might look like:
 ```bash
 alak x = 5;
