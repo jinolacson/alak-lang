@@ -31,9 +31,8 @@ python3 -m venv env && source env/bin/activate && pip install -e .
 ### Usage
 ```bash
 alak init # Creates hello.alak
-
+alak repl # Launches interactive REPL shell
 alak run hello.alak # Runs the program
-
 alak --version # Outputs: alak version 0.1.0
 ```
 
@@ -70,6 +69,22 @@ x is less than y
 8.0
 9.0
 Hello from inom!
+```
+
+### REPL Example
+You can test single lines of Alak code interactively using the REPL:
+
+```bash
+alak repl
+```
+
+output:
+```bash
+alak> alak a = 3;
+alak> alak b = 5;
+alak> tungga a + b;
+8.0
+alak> exit
 ```
 
 ### License
