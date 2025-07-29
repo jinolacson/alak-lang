@@ -43,7 +43,7 @@ alak x = 5;
 alak y = 10;
 tungga x;
 kung (x < y) tagay
-    tungga "x is less than y";
+    tungga "{x} is less than {y}";
 bitaw
 
 ikot (x < 10) tagay

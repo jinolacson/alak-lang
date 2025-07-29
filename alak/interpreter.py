@@ -4,7 +4,7 @@ Project: alak
 Date: 2025-07-21
 Version: 1.0.0
 """
-
+import re
 from lark import Lark, Transformer
 
 alak_grammar = """
@@ -76,7 +76,12 @@ class AlakInterpreter(Transformer):
         return lambda: float(n[0])
 
     def string(self, s):
-        return lambda: s[0][1:-1]
+        raw_string = s[0][1:-1]  # remove the quotes
+
+        def interpolate():
+            return re.sub(r'\{([a-zA-Z_]\w*)\}', lambda m: str(self.vars.get(m.group(1), f"{{{m.group(1)}}}")), raw_string)
+
+        return interpolate
 
     def add(self, items):
         return lambda: items[0]() + items[1]()
