@@ -1,25 +1,18 @@
-lapag tropa = "Leetz";
-lapag ambag_one = 5;
-lapag ambag_two = 150;
-lapag total_ambag = 0;
 
-total_ambag = ambag_one + ambag_two;
+alak x = 5;
+alak y = 10;
+tungga x;
+kung (x < y) tagay
+    tungga "x is less than y";
+bitaw
 
-if total_ambag > 100 {
-  shot "letsgo";
-} else {
-  shot "Ambag muna";
-}
+ikot (x < 10) tagay
+    tungga x;
+    alak x = x + 1;
+bitaw
 
+inom greet tagay
+    tungga "Hello from inom!";
+bitaw
 
-lapag bote = 0;
-jumbo bote < 5 {
-  shot "Bili na ng {bote} gin";
-  bote = bote + 1;
-}
-
-fun oras_na {
-  shot "Shot na {tropa} may ambag {total_ambag} pesos na!";
-}
-
-oras_na();
+greet();
