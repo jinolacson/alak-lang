@@ -1,98 +1,125 @@
-class Interpreter:
+from lark import Lark, Transformer
+
+alak_grammar = """
+start: statement+
+
+statement: print_stmt
+         | assign_stmt
+         | if_stmt
+         | while_stmt
+         | func_def
+         | func_call
+
+print_stmt: "tungga" expr ";"
+assign_stmt: "alak" CNAME "=" expr ";"
+if_stmt: "kung" "(" condition ")" "tagay" statement+ "bitaw"
+while_stmt: "ikot" "(" condition ")" "tagay" statement+ "bitaw"
+func_def: "inom" CNAME "tagay" statement+ "bitaw"
+func_call: CNAME "()" ";"
+
+condition: expr comp_op expr
+
+?expr: expr "+" term   -> add
+     | expr "-" term   -> sub
+     | term
+
+?term: term "*" factor -> mul
+     | term "/" factor -> div
+     | factor
+
+?factor: NUMBER        -> number
+       | STRING        -> string
+       | CNAME         -> var
+       | "(" expr ")"
+
+comp_op: "==" | "!=" | ">" | "<"
+
+%import common.CNAME
+%import common.NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
+"""
+
+class AlakInterpreter(Transformer):
     def __init__(self):
-        self.env = {}
+        self.vars = {}
+        self.funcs = {}
 
-    def interpret(self, ast):
-        for stmt in ast:
-            self.execute(stmt)
+    def start(self, items):
+        for stmt in items:
+            if callable(stmt):
+                stmt()
 
-    def execute(self, stmt):
-        if stmt[0] == 'lapag':  # let statement
-            _, name, expr = stmt
-            self.env[name] = self.evaluate(expr)
+    def statement(self, items):
+        return items[0]
 
-        elif stmt[0] == 'assign':
-            _, name, expr = stmt
-            if name not in self.env:
-                raise RuntimeError(f"Undefined variable '{name}'")
-            self.env[name] = self.evaluate(expr)
+    def print_stmt(self, items):
+        return lambda: print(items[0]())
 
+    def assign_stmt(self, items):
+        var_name = str(items[0])
+        expr_fn = items[1]
+        return lambda: self.vars.__setitem__(var_name, expr_fn())
 
-        elif stmt[0] == 'print':
-            _, expr = stmt
-            value = self.evaluate(expr)
+    def var(self, name):
+        return lambda: self.vars.get(str(name[0]), 0)
 
-            # If value is a string, interpolate variables inside `{}` 
-            #  Example  shot "Shot na {tropa}";
-            if isinstance(value, str):
-                import re
-                def replacer(match):
-                    var_name = match.group(1)
-                    return str(self.env.get(var_name, f'{{{var_name}}}'))
-                value = re.sub(r'\{(\w+)\}', replacer, value)
-            print(value)
+    def number(self, n):
+        return lambda: float(n[0])
 
+    def string(self, s):
+        return lambda: s[0][1:-1]
 
-        elif stmt[0] == 'if':
-            _, cond, then_branch, else_branch = stmt
-            if self.evaluate(cond):
-                for s in then_branch:
-                    self.execute(s)
-            elif else_branch:
-                for s in else_branch:
-                    self.execute(s)
-        
-        elif stmt[0] == 'jumbo': # while loop
-            _, cond, body = stmt
-            while self.evaluate(cond):
-                for s in body:
-                    self.execute(s)
+    def add(self, items):
+        return lambda: items[0]() + items[1]()
 
-        elif stmt[0] == 'fun': # function declaration
-            _, name, body = stmt
-            self.env[name] = ('function', body)
+    def sub(self, items):
+        return lambda: items[0]() - items[1]()
 
-        elif stmt[0] == 'call':
-            _, name = stmt
-            if name not in self.env or self.env[name][0] != 'function':
-                raise RuntimeError(f"Function '{name}' not defined")
-            _, body = self.env[name]
-            for inner_stmt in body:
-                self.execute(inner_stmt)
+    def mul(self, items):
+        return lambda: items[0]() * items[1]()
 
-    def evaluate(self, expr):
-        kind = expr[0]
-        if kind == 'number':
-            return expr[1]
-        elif kind == 'string':
-            return expr[1]
-        elif kind == 'var':
-            return self.env.get(expr[1], None)
-        elif kind == 'add':
-            return self.evaluate(expr[1]) + self.evaluate(expr[2])
-        elif kind == 'gt':
-            return self.evaluate(expr[1]) > self.evaluate(expr[2])
-        elif kind == 'lt':
-            return self.evaluate(expr[1]) < self.evaluate(expr[2])
-        elif kind == 'gte':
-            return self.evaluate(expr[1]) >= self.evaluate(expr[2])
-        elif kind == 'lte':
-            return self.evaluate(expr[1]) <= self.evaluate(expr[2])
-        elif kind == 'eq':
-            return self.evaluate(expr[1]) == self.evaluate(expr[2])
-        elif kind == 'neq':
-            return self.evaluate(expr[1]) != self.evaluate(expr[2])
-        elif kind == 'gt':
-            return self.evaluate(expr[1]) > self.evaluate(expr[2])
-        elif kind == 'lt':
-            return self.evaluate(expr[1]) < self.evaluate(expr[2])
-        elif kind == 'gte':
-            return self.evaluate(expr[1]) >= self.evaluate(expr[2])
-        elif kind == 'lte':
-            return self.evaluate(expr[1]) <= self.evaluate(expr[2])
-        elif kind == 'eq':
-            return self.evaluate(expr[1]) == self.evaluate(expr[2])
-        elif kind == 'neq':
-            return self.evaluate(expr[1]) != self.evaluate(expr[2])
+    def div(self, items):
+        return lambda: items[0]() / items[1]()
+
+    def comp_op(self, tokens):
+        if not tokens:
+            print(f"comp_op received no tokens {tokens}")
+            return None
+        return tokens[0].value
 
 
+    def condition(self, items):
+        left, op, right = items
+        return lambda: (
+            left() == right() if op == "==" else
+            left() != right() if op == "!=" else
+            left() > right() if op == ">" else
+            left() < right()
+        )
+
+    def if_stmt(self, items):
+        condition_fn = items[0]
+        body = items[1:]
+        return lambda: [stmt() for stmt in body] if condition_fn() else None
+
+    def while_stmt(self, items):
+        condition_fn = items[0]
+        body = items[1:]
+        def loop():
+            while condition_fn():
+                for stmt in body:
+                    stmt()
+        return loop
+
+    def func_def(self, items):
+        name = str(items[0])
+        body = items[1:]
+        self.funcs[name] = body
+        return lambda: None
+
+    def func_call(self, items):
+        name = str(items[0])
+        body = self.funcs.get(name, [])
+        return lambda: [stmt() for stmt in body]
