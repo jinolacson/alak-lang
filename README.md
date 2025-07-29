@@ -23,9 +23,8 @@ alak-lang/
 ### 1. How to install
 
 ```bash
-git clone https://github.com/your-username/alak.git
-python3 -m venv env
-source env/bin/activate
+git clone git@github.com:jinolacson/alak-lang.git
+python3 -m venv env && source env/bin/activate
 pip install -e .
 ```
 
