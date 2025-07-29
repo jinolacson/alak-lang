@@ -6,26 +6,32 @@
 
 ## Project Structure
 ```bash
-alak/
-  alak.py          # Entry CLI file
-  interpreter.py   # Transformer logic
-  requirements.txt # Dependencies
+alak-lang/
+├── alak/
+│   ├── __init__.py
+│   ├── cli.py           # Entry CLI file
+│   └── interpreter.py   # Transformer logic
+├── example.alak         # Example program
+├── setup.py             # Setup config
+└── requirements.txt     # Dependencies
 ```
 
 ---
 
 ## Getting Started
 
-### 1. Clone the Repository
+### 1. How to install
 
 ```bash
 git clone https://github.com/your-username/alak.git
-cd alak
+python3 -m venv env
+source env/bin/activate
+pip install -e .
 ```
 
 ### Run an Alak Program
 ```bash
-python alak.py run example.alak
+alak run example.alak
 ```
 Make sure you have Python 3.10 installed.
 
