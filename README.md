@@ -1,6 +1,6 @@
-#  Alak
+#  Alak Programming Language
 
-**Alak** is a fun, Tagalog-inspired esolang designed for learning and laughs. It uses Filipino "inuman" terms as syntax.
+**AlakLang** is a fun, Tagalog-inspired esolang designed for learning and laughs. It uses Filipino "inuman" terms as syntax.
 
 ---
 
