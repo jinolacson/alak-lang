@@ -36,42 +36,67 @@ alak run hello.alak # Runs the program
 alak --version # Outputs: alak version 0.1.0
 ```
 
-### Sample Program
-Here's what an example ```.alak``` file might look like:
-```bash
+### Supported Features in AlakLang
+🔹 Variable Declaration
+Use alak to declare and initialize a variable:
+```
 alak x = 5;
 alak y = 10;
-tungga x;
+```
 
+* Use tungga to print expressions or strings (with variable interpolation):
+```
+tungga x;
+tungga "Total ay {x}";
+```
+
+🔹 Comments
+Alak supports c-style comment:
+
+```
+// Ito ay comment pare!
+```
+
+🔹 If Statement
+Use ```kung```, ```tagay```, and ```bitaw``` for conditional logic:
+
+```
 kung (x < y) tagay
     tungga "{x} pesos ay kaunti sa ambag na {y}";
 bitaw
+```
 
+🔹 While Loop
+Use ```ikot```, ```tagay```, and ```bitaw``` for looping:
+
+```
 ikot (x < 10) tagay
     tungga x;
     alak x = x + 1;
 bitaw
+```
 
+🔹 Function Definition & Calling
+Use ```inom``` to define a function and call it like normal:
+
+```
 inom ginebra(a, b) tagay
-  alak sum = a + b;
-  tungga "Total ng tinagay ng tropa ay {sum}";
+    alak sum = a + b;
+    tungga "Total ng tinagay ng tropa ay {sum}";
 bitaw
 
 ginebra(3, 5);
-
 ```
 
-Output:
-```bash
-5.0
-5.0 pesos ay kaunti sa ambag na 10.0
-5.0
-6.0
-7.0
-8.0
-9.0
-Total ng tinagay ng tropa ay 8.0
+🔹 Arrays & Indexing
+Declare arrays using square brackets ```[]``` and access elements using indices:
+
 ```
+alak tropa = ["Mark", "Leetz", "Leo"];
+tungga tropa[0];
+tungga tropa[1];
+```
+
 
 ### REPL Example
 You can test single lines of Alak code interactively using the REPL:
@@ -97,10 +122,11 @@ alak> exit
 * ```ginebra(...)``` for function calls
 * ```"{var}"``` String interpolation
 * C-style comments ```\\ This is comment```
+* Array ```["Mark", "Leetz", "Leo"]```
 
-### Keyword Definitions
+### New Keywords (Under development)
 ```bash
-WIP:
+
 - 1. Boolean Literals saka mga Logic Operators
 alak isOpen = myTama;
 kung (isOpen == walangTama) tagay
@@ -116,17 +142,12 @@ bitaw
 alak nahilo = add(3, 5);
 tungga nahilo;
 
-
-- 3. Arrays saka Indexing
-alak tropa = ["Mark", "Leetz", "Leo"];
-tungga tropa[1];  // "Leetz"
-
-- 4. Mga Built-in Functions
+- 3. Mga Built-in Functions
 haba(str) // haba ng salita
 tropa.jamming(x) // ilagay sa jamming array
 bilang(tropa) // bilangin ang tropa
 
-- 5. Math library saka Error reporting (Optional lamang)
+- 4. Math library saka Error reporting (Optional lamang)
 ```
 
 ### License

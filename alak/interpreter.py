@@ -38,10 +38,17 @@ condition: expr comp_op expr
      | term "/" factor -> div
      | factor
 
-?factor: NUMBER        -> number
+?factor: list_literal
+       | index_access
+       | NUMBER        -> number
        | STRING        -> string
        | CNAME         -> var
        | "(" expr ")"
+
+list_literal: "[" [expr_list] "]"
+expr_list: expr ("," expr)*
+
+index_access: CNAME "[" expr "]"
 
 comp_op: "==" | "!=" | ">" | "<"
 
@@ -132,6 +139,7 @@ class AlakInterpreter(Transformer):
                     stmt()
         return loop
 
+    # Function Definitions and Calls
     def func_def(self, items):
         name = str(items[0])
         param_names = [str(p) for p in items[1].children] if hasattr(items[1], 'children') else []
@@ -166,3 +174,23 @@ class AlakInterpreter(Transformer):
             self.vars = old_vars
 
         return call
+    
+    
+    # Array and List Handling
+    def expr_list(self, items):
+        return [item for item in items]
+    
+    def list_literal(self, items):
+        if items:
+            if isinstance(items[0], list):
+                return lambda: [item() for item in items[0]]
+            else:
+                return lambda: [item() for item in items]
+        return lambda: []
+    
+    def index_access(self, items):
+        var_name = str(items[0])
+        index_fn = items[1]
+        return lambda: self.vars[var_name][int(index_fn())]
+
+
