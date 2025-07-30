@@ -50,6 +50,9 @@ comp_op: "==" | "!=" | ">" | "<"
 %import common.ESCAPED_STRING -> STRING
 %import common.WS
 %ignore WS
+
+SL_COMMENT: /\/\/[^\\r\\n]*/
+%ignore SL_COMMENT
 """
 
 class AlakInterpreter(Transformer):

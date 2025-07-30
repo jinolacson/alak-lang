@@ -16,4 +16,6 @@ inom ginebra(a, b) tagay
   tungga "Total ng tinagay ng tropa ay {sum}";
 bitaw
 
-ginebra(3, 5);
+// This is comment 1
+// This is comment 2
+ginebra(3, 5); 
