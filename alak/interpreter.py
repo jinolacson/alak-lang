@@ -21,8 +21,12 @@ print_stmt: "tungga" expr ";"
 assign_stmt: "alak" CNAME "=" expr ";"
 if_stmt: "kung" "(" condition ")" "tagay" statement+ "bitaw"
 while_stmt: "ikot" "(" condition ")" "tagay" statement+ "bitaw"
-func_def: "inom" CNAME "tagay" statement+ "bitaw"
-func_call: CNAME "()" ";"
+
+func_def: "inom" CNAME "(" [params] ")" "tagay" statement+ "bitaw"
+params: CNAME ("," CNAME)*
+
+func_call: CNAME "(" [args] ")" ";"
+args: expr ("," expr)*
 
 condition: expr comp_op expr
 
@@ -127,11 +131,35 @@ class AlakInterpreter(Transformer):
 
     def func_def(self, items):
         name = str(items[0])
-        body = items[1:]
-        self.funcs[name] = body
+        param_names = [str(p) for p in items[1].children] if hasattr(items[1], 'children') else []
+        body = items[2:] if param_names else items[1:]
+        self.funcs[name] = (param_names, body)
         return lambda: None
 
     def func_call(self, items):
         name = str(items[0])
-        body = self.funcs.get(name, [])
-        return lambda: [stmt() for stmt in body]
+        args = items[1].children if len(items) > 1 and hasattr(items[1], 'children') else []
+
+        def call():
+            if name not in self.funcs:
+                raise Exception(f"Undefined function '{name}'")
+
+            param_names, body = self.funcs[name]
+            if len(param_names) != len(args):
+                raise Exception(f"Function '{name}' expected {len(param_names)} arguments, got {len(args)}")
+
+            # Save current variable scope
+            old_vars = self.vars.copy()
+
+            # Bind args to params
+            for pname, pval in zip(param_names, args):
+                self.vars[pname] = pval()
+
+            # Run function body
+            for stmt in body:
+                stmt()
+
+            # Restore scope
+            self.vars = old_vars
+
+        return call
