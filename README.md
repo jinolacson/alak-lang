@@ -89,5 +89,45 @@ alak> tungga a + b;
 alak> exit
 ```
 
+### Implemented features
+* ```alak``` for variable assignment
+* ```tungga``` for print
+* ```kung```, ```ikot``` for control flow (if, while)
+* ```inom``` for function definition
+* ```ginebra(...)``` for function calls
+* ```"{var}"``` String interpolation
+* C-style comments ```\\ This is comment```
+
+### Keyword Definitions
+```bash
+WIP:
+- 1. Boolean Literals saka mga Logic Operators
+alak isOpen = myTama;
+kung (isOpen == walangTama) tagay
+    tungga "Bukas na!";
+bitaw
+
+
+- 2. Statement na balikTagay
+inom add(a, b) tagay
+    balikTagay a + b;
+bitaw
+
+alak nahilo = add(3, 5);
+tungga nahilo;
+
+
+- 3. Arrays saka Indexing
+alak tropa = ["Mark", "Leetz", "Leo"];
+tungga tropa[1];  // "Leetz"
+
+- 4. Mga Built-in Functions
+haba(str) // haba ng salita
+tropa.jamming(x) // ilagay sa jamming array
+bilang(tropa) // bilangin ang tropa
+
+- 5. Math library saka Error reporting (Optional lamang)
+```
+
 ### License
 MIT License. Feel free to use and modify.
