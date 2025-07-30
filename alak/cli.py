@@ -7,15 +7,19 @@ Version: 1.0.0
 
 import sys
 import os
-from alak.interpreter import AlakInterpreter, alak_grammar
 from lark import Lark
+from alak.interpreter import AlakInterpreter
+from alak.alak_grammar import grammar  
+
+# Initialize the interpreter
+interpreter = AlakInterpreter()
 
 VERSION = "0.1.0"
 
 def run_file(filename):
     with open(filename, 'r') as file:
         code = file.read()
-    parser = Lark(alak_grammar, parser='lalr', transformer=AlakInterpreter())
+    parser = Lark(grammar, parser='lalr', transformer=interpreter)
     parser.parse(code)
 
 def init_project():
@@ -32,8 +36,7 @@ def init_project():
 
 def run_repl():
     print("Welcome sa tropa sa REPL! tatagay ba tayo? kung hindi itype ang 'exit' para mag quit.")
-    interpreter = AlakInterpreter()
-    parser = Lark(alak_grammar, parser='lalr', transformer=interpreter)
+    parser = Lark(grammar, parser='lalr', transformer=interpreter)
 
     while True:
         try:
