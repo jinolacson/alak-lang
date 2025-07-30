@@ -64,13 +64,13 @@ ginebra(3, 5);
 Output:
 ```bash
 5.0
-x is less than y
+5.0 pesos ay kaunti sa ambag na 10.0
 5.0
 6.0
 7.0
 8.0
 9.0
-Hello from inom!
+Total ng tinagay ng tropa ay 8.0
 ```
 
 ### REPL Example
