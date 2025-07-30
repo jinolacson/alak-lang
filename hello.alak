@@ -1,0 +1,19 @@
+alak x = 5;
+alak y = 10;
+tungga x;
+
+kung (x < y) tagay
+    tungga "{x} pesos ay kaunti sa ambag na {y}";
+bitaw
+
+ikot (x < 10) tagay
+    tungga x;
+    alak x = x + 1;
+bitaw
+
+inom ginebra(a, b) tagay
+  alak sum = a + b;
+  tungga "Total ng tinagay ng tropa ay {sum}";
+bitaw
+
+ginebra(3, 5);

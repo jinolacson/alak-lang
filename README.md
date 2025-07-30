@@ -42,8 +42,9 @@ Here's what an example ```.alak``` file might look like:
 alak x = 5;
 alak y = 10;
 tungga x;
+
 kung (x < y) tagay
-    tungga "{x} is less than {y}";
+    tungga "{x} pesos ay kaunti sa ambag na {y}";
 bitaw
 
 ikot (x < 10) tagay
@@ -51,11 +52,12 @@ ikot (x < 10) tagay
     alak x = x + 1;
 bitaw
 
-inom greet tagay
-    tungga "Hello from inom!";
+inom ginebra(a, b) tagay
+  alak sum = a + b;
+  tungga "Total ng tinagay ng tropa ay {sum}";
 bitaw
 
-greet();
+ginebra(3, 5);
 
 ```
 
