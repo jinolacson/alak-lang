@@ -44,6 +44,13 @@ alak x = 5;
 alak y = 10;
 ```
 
+You can also use Boolean values:
+
+```
+alak sanMigApple = walangTama; // false
+alak alfonsoBrandy = myTama;   // true
+```
+
 * Use tungga to print expressions or strings (with variable interpolation):
 ```
 tungga x;
@@ -121,20 +128,14 @@ alak> exit
 * ```inom``` for function definition
 * ```ginebra(...)``` for function calls
 * ```"{var}"``` String interpolation
-* C-style comments ```\\ This is comment```
+* Boolean literals: ```myTama``` (true), ```walangTama``` (false)
+* C-style comments: ```\\ Ito ay comment pare!```
 * Array ```["Mark", "Leetz", "Leo"]```
 
 ### New Keywords (Under development)
+
+1. ```balikTagay``` Return Statements
 ```bash
-
-- 1. Boolean Literals saka mga Logic Operators
-alak isOpen = myTama;
-kung (isOpen == walangTama) tagay
-    tungga "Bukas na!";
-bitaw
-
-
-- 2. Statement na balikTagay
 inom add(a, b) tagay
     balikTagay a + b;
 bitaw
@@ -142,13 +143,16 @@ bitaw
 alak nahilo = add(3, 5);
 tungga nahilo;
 
-- 3. Mga Built-in Functions
-haba(str) // haba ng salita
-tropa.jamming(x) // ilagay sa jamming array
-bilang(tropa) // bilangin ang tropa
-
-- 4. Math library saka Error reporting (Optional lamang)
 ```
+
+2. Built-in Functions
+```bash
+haba("alak")        // 4
+tropa.nahilo(x)    // push x to tropa array
+bilang(tropa)       // Get length
+nahilo.PataAs()    // first Uppercase letter
+```
+4. (Optional) Math library & Better Error Reporting
 
 ### License
 MIT License. Feel free to use and modify.

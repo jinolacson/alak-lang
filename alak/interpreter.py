@@ -42,6 +42,8 @@ condition: expr comp_op expr
        | index_access
        | NUMBER        -> number
        | STRING        -> string
+       | "walangTama"  -> false
+       | "myTama"      -> true
        | CNAME         -> var
        | "(" expr ")"
 
@@ -96,7 +98,15 @@ class AlakInterpreter(Transformer):
             return re.sub(r'\{([a-zA-Z_]\w*)\}', lambda m: str(self.vars.get(m.group(1), f"{{{m.group(1)}}}")), raw_string)
 
         return interpolate
+    
+    # Boolean Values
+    def false(self, _):
+        return lambda: False
 
+    def true(self, _):
+        return lambda: True
+
+    # Arithmetic Operations
     def add(self, items):
         return lambda: items[0]() + items[1]()
 
