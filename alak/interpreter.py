@@ -171,6 +171,14 @@ class AlakInterpreter(Transformer):
         var_name = str(items[0])
         expr_fn = items[1]
         return lambda: self.vars.__setitem__(var_name, expr_fn())
+    
+    # Exit Program
+    def patay_stmt(self, _):
+        def exit_program():
+            print("Exiting AlakLang... Patay na.")
+            raise SystemExit()
+        return exit_program
+
 
 
 

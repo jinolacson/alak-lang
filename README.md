@@ -113,6 +113,13 @@ hangOver alak i = 0; i < 3; i = i + 1 tagay
 bitaw
 ```
 
+* Exit Program with ```patayNa()```
+
+```
+tungga "Lasing na, uwian na!";
+patayNa();
+```
+
 ### REPL Example
 You can test single lines of Alak code interactively using the REPL:
 
@@ -179,14 +186,7 @@ bitaw
 tungga "Tagay para sa nag ambag na {name}!";
 ```
 
-7. Exit Program with ```patayNa()```
-
-
-```
-tungga "Lasing na, uwian na!";
-patayNa();
-```
-9. Call Functions with ```kalabit```
+7. Call Functions with ```kalabit```
 
 ```
 inom paShot() tagay

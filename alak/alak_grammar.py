@@ -8,6 +8,7 @@ statement: print_stmt
          | func_def
          | func_call
          | hangover_stmt
+         | patay_stmt
 
 print_stmt: "tungga" expr ";"
 assign_stmt: "alak" CNAME "=" expr ";"
@@ -23,6 +24,8 @@ assign_expr: "alak" CNAME "=" expr
 
 func_call: CNAME "(" [args] ")" ";"
 args: expr ("," expr)*
+
+patay_stmt: "patayNa" "(" ")" ";"
 
 condition: expr comp_op expr
 
