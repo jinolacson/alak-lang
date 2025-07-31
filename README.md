@@ -105,6 +105,13 @@ tungga tropa[0];
 tungga tropa[1];
 ```
 
+* Tagay-style For Loop: ```hangOver```
+
+```
+hangOver alak i = 0; i < 3; i = i + 1 tagay
+    tungga "Shot #{i}";
+bitaw
+```
 
 ### REPL Example
 You can test single lines of Alak code interactively using the REPL:
@@ -166,21 +173,13 @@ bitaw sukaException
 bitaw
 ```
 
-6. Tagay-style For Loop: ```hangOver```
-
-```
-hangOver alak i = 0; i < 3; i = i + 1 tagay
-    tungga "Shot #{i}";
-bitaw
-```
-
-7. Input from User with ```ambag()```
+6. Input from User with ```ambag()```
 
 ```
 tungga "Tagay para sa nag ambag na {name}!";
 ```
 
-8. Exit Program with ```patayNa()```
+7. Exit Program with ```patayNa()```
 
 
 ```
