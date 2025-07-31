@@ -144,5 +144,34 @@ class AlakInterpreter(Transformer):
         var_name = str(items[0])
         index_fn = items[1]
         return lambda: self.vars[var_name][int(index_fn())]
+    
+    
+    # Hangover Statement (for loop)
+    def hangover_stmt(self, items):
+        init_fn = items[0]      # assign_stmt
+        condition_fn = items[1] # condition
+        step_fn = items[2]      # step_expr
+        body = items[3:]        # statements
+
+        def loop():
+            init_fn()
+            while condition_fn():
+                for stmt in body:
+                    stmt()
+                step_fn()
+
+        return loop
+
+    def step_expr(self, items):
+        var_name = str(items[0])
+        value_fn = items[1]
+        return lambda: self.vars.__setitem__(var_name, value_fn())
+
+    def assign_expr(self, items):
+        var_name = str(items[0])
+        expr_fn = items[1]
+        return lambda: self.vars.__setitem__(var_name, expr_fn())
+
+
 
 

@@ -7,6 +7,7 @@ statement: print_stmt
          | while_stmt
          | func_def
          | func_call
+         | hangover_stmt
 
 print_stmt: "tungga" expr ";"
 assign_stmt: "alak" CNAME "=" expr ";"
@@ -15,6 +16,10 @@ while_stmt: "ikot" "(" condition ")" "tagay" statement+ "bitaw"
 
 func_def: "inom" CNAME "(" [params] ")" "tagay" statement+ "bitaw"
 params: CNAME ("," CNAME)*
+
+hangover_stmt: "hangOver" assign_stmt condition ";" step_expr "tagay" statement+ "bitaw"
+step_expr: CNAME "=" expr
+assign_expr: "alak" CNAME "=" expr
 
 func_call: CNAME "(" [args] ")" ";"
 args: expr ("," expr)*
