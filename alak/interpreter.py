@@ -34,12 +34,19 @@ class AlakInterpreter(Transformer):
         return lambda: float(n[0])
 
     def string(self, s):
-        raw_string = s[0][1:-1]  # remove the quotes
+        raw_string = s[0][1:-1]
 
         def interpolate():
-            return re.sub(r'\{([a-zA-Z_]\w*)\}', lambda m: str(self.vars.get(m.group(1), f"{{{m.group(1)}}}")), raw_string)
+            def eval_expr(expr):
+                try:
+                    return eval(expr, {}, self.vars)
+                except Exception:
+                    return f"{{{expr}}}"
+
+            return re.sub(r'\{([^}]+)\}', lambda m: str(eval_expr(m.group(1))), raw_string)
 
         return interpolate
+
     
     # Boolean Values
     def false(self, _):
@@ -184,6 +191,39 @@ class AlakInterpreter(Transformer):
     def ambag_expr(self, items):
         prompt_fn = items[0]
         return lambda: input(prompt_fn())
+    
+    # Lenght of word
+    def haba_expr(self, items):
+        string_fn = items[0]
+        return lambda: len(string_fn())
+
+    # First letter uppercase
+    def taas_expr(self, items):
+        string_fn = items[0]
+        return lambda: str(string_fn()).upper()
+    
+    # tropa.nahilo(x)    // push x to tropa array 
+    def method_call_expr(self, items):
+        obj_name = str(items[0])     # e.g. tropa
+        method_name = str(items[1])  # e.g. nahilo
+        args = items[2].children if len(items) > 2 and hasattr(items[2], 'children') else []
+
+        def call():
+            target = self.vars.get(obj_name)
+            if not isinstance(target, list):
+                raise Exception(f"'{obj_name}' is not a list")
+
+            if method_name == "nahilo":
+                if len(args) != 1:
+                    raise Exception("nahilo() expects 1 argument")
+                target.append(args[0]())
+            else:
+                raise Exception(f"Unknown method '{method_name}'")
+
+        return call
+
+
+
 
 
 
