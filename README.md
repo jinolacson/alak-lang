@@ -136,6 +136,13 @@ alak x = "joseph";
 
 tropa.nahilo(x);      // append "joseph" to array
 tungga "{tropa[2]} ay bagong tropa!";   // joseph ay bagong tropa!
+
+
+// lagok
+alak shot = lagok(1, 5);
+alak inumin = ["GSM", "Empe", "SanMig"];
+alak randomInom = lagok(inumin);
+tungga "Tinagay ay {randomInom}, dami: {shot}"; // Tinagay ay ['GSM', 'Empe', 'SanMig'], dami: 1.0
 ```
 
 * Exit Program with ```patayNa()```
@@ -177,16 +184,7 @@ tungga nahilo;
 
 ```
 
-2. Randomness with ```lagok()```
-
-```
-alak shot = lagok(1, 5); // Random between 1 to 5
-alak inumin = ["GSM", "Empe", "SanMig"];
-alak randomInom = lagok(inumin);
-tungga "Tinagay ay {randomInom}, dami: {shot}";
-```
-
-3. Error Handling with ```sukaException```
+2. Error Handling with ```sukaException```
 
 ```
 try tagay
@@ -196,7 +194,7 @@ bitaw sukaException
 bitaw
 ```
 
-4. Call Functions with ```kalabit```
+3. Call Functions with ```kalabit```
 
 ```
 inom paShot() tagay

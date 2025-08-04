@@ -38,7 +38,8 @@ condition: expr comp_op expr
      | term "/" factor -> div
      | factor
 
-?factor: method_call_expr
+?factor: method_call
+       | method_call_expr
        | haba_expr
        | taas_expr
        | ambag_expr
@@ -60,6 +61,7 @@ haba_expr: "haba" "(" expr ")"
 taas_expr: "taasTagay" "(" expr ")"
 ambag_expr: "ambag" "(" expr ")"
 method_call_expr: CNAME "." CNAME "(" [args] ")"
+method_call: CNAME "(" [expr_list] ")"
 
 comp_op: "==" | "!=" | ">" | "<"
 
