@@ -4,20 +4,6 @@
 
 ---
 
-## Project Structure
-```bash
-alak-lang/
-├── alak/
-│   ├── __init__.py
-│   ├── cli.py             # Entry CLI file
-│   ├── interpreter.py     # Transformer and runtime evaluator for executing AlakLang code
-│   └── alak_grammar.py    # Contains the Alak language grammar defined in EBNF syntax as a Python string
-├── setup.py               # Installer
-└── requirements.txt       # Dependencies
-```
-
----
-
 ## Getting Started
 
 ### 1. How to install
