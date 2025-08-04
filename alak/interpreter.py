@@ -4,6 +4,7 @@ Project: alak
 Date: 2025-07-21
 Version: 1.0.0
 """
+import random
 import re
 from lark import Lark, Transformer
 class AlakInterpreter(Transformer):
@@ -192,7 +193,7 @@ class AlakInterpreter(Transformer):
         prompt_fn = items[0]
         return lambda: input(prompt_fn())
     
-    # Lenght of word
+    # Length of word
     def haba_expr(self, items):
         string_fn = items[0]
         return lambda: len(string_fn())
@@ -221,6 +222,23 @@ class AlakInterpreter(Transformer):
                 raise Exception(f"Unknown method '{method_name}'")
 
         return call
+    
+    # Define custom function call here e.g: lagok()
+    def method_call(self, items):
+        method_name = str(items[0])
+        args = items[1:] if len(items) > 1 else []
+
+        # method logic here
+        if method_name == "lagok":
+            if len(args) == 2:
+                return random.randint(args[0], args[1])
+            elif len(args) == 1 and isinstance(args[0], list):
+                return random.choice(args[0])
+            else:
+                raise ValueError("lagok() needs 2 numbers or a list")
+        # Add more methods here
+        else:
+            raise Exception(f"Unknown method: {method_name}")
 
 
 
