@@ -48,3 +48,37 @@ Now you can run:
 ```
 alak yourfile.alak
 ```
+
+
+# Update Alak Package on PyPI
+
+If using setup.py
+
+```
+setup(
+    name="alak",
+    version="0.1.1",  # <-- update this
+    ...
+)
+```
+
+If using pyproject.toml:
+
+```
+[project]
+name = "alak"
+version = "0.1.1"  # <-- update this
+```
+
+ Clean old build artifacts (optional but recommended)
+
+ ```
+ rm -rf dist/ build/ *.egg-info
+ ```
+
+
+Re-upload using Twine
+
+```
+twine upload dist/*
+ ```
