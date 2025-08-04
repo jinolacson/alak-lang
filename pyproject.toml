@@ -1,6 +1,6 @@
 [project]
 name = "alak"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Filipino-flavored programming language."
 authors = [
   { name="Jino Lacson", email="jino@example.com" }

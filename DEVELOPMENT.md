@@ -76,6 +76,12 @@ version = "0.1.1"  # <-- update this
  rm -rf dist/ build/ *.egg-info
  ```
 
+Rebuild the package
+
+```
+python -m build
+
+```
 
 Re-upload using Twine
 

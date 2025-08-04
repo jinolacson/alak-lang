@@ -9,7 +9,7 @@
 To install type:
 
 ```
-pip install alak==0.1.0
+pip install alak
 ```
 
 ### Usage
