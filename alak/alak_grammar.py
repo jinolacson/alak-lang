@@ -9,6 +9,7 @@ statement: print_stmt
          | func_call
          | hangover_stmt
          | patay_stmt
+         | method_call_expr ";"
 
 print_stmt: "tungga" expr ";"
 assign_stmt: "alak" CNAME "=" expr ";"
@@ -37,7 +38,10 @@ condition: expr comp_op expr
      | term "/" factor -> div
      | factor
 
-?factor: ambag_expr
+?factor: method_call_expr
+       | haba_expr
+       | taas_expr
+       | ambag_expr
        | list_literal
        | index_access
        | NUMBER        -> number
@@ -52,7 +56,10 @@ expr_list: expr ("," expr)*
 
 index_access: CNAME "[" expr "]"
 
+haba_expr: "haba" "(" expr ")"
+taas_expr: "taasTagay" "(" expr ")"
 ambag_expr: "ambag" "(" expr ")"
+method_call_expr: CNAME "." CNAME "(" [args] ")"
 
 comp_op: "==" | "!=" | ">" | "<"
 
