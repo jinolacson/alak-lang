@@ -37,7 +37,8 @@ condition: expr comp_op expr
      | term "/" factor -> div
      | factor
 
-?factor: list_literal
+?factor: ambag_expr
+       | list_literal
        | index_access
        | NUMBER        -> number
        | STRING        -> string
@@ -50,6 +51,8 @@ list_literal: "[" [expr_list] "]"
 expr_list: expr ("," expr)*
 
 index_access: CNAME "[" expr "]"
+
+ambag_expr: "ambag" "(" expr ")"
 
 comp_op: "==" | "!=" | ">" | "<"
 

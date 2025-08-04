@@ -113,6 +113,13 @@ hangOver alak i = 0; i < 3; i = i + 1 tagay
 bitaw
 ```
 
+* Input from User with ```ambag()```
+
+```
+alak pare = ambag("Sino nag ambag? ");
+tungga "Salamat {pare}!";
+```
+
 * Exit Program with ```patayNa()```
 
 ```
@@ -180,13 +187,7 @@ bitaw sukaException
 bitaw
 ```
 
-6. Input from User with ```ambag()```
-
-```
-tungga "Tagay para sa nag ambag na {name}!";
-```
-
-7. Call Functions with ```kalabit```
+6. Call Functions with ```kalabit```
 
 ```
 inom paShot() tagay

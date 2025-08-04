@@ -178,6 +178,13 @@ class AlakInterpreter(Transformer):
             print("Exiting AlakLang... Patay na.")
             raise SystemExit()
         return exit_program
+    
+    
+    # Ambag function get input from user
+    def ambag_expr(self, items):
+        prompt_fn = items[0]
+        return lambda: input(prompt_fn())
+
 
 
 
